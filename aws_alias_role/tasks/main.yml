@@ -1,9 +1,9 @@
 ---
 
 - name: Ensure AWS alias name
-  iam:
-    aws_account_alias: {{ aws_account_alias }}
+  iam_alias:
+    aws_account_alias: "{{ aws_account_alias }}"
     aws_account_state: present
-    aws_access_key: {{ aws_access_key }}
-    aws_secret_key: {{ aws_secrete_key }}
+    aws_access_key: "{{ aws_access_key | default(ansible_env.AWS_ACCESS_KEY_ID) }}"
+    aws_secret_key: "{{ aws_secret_key | default(ansible_env.AWS_SECRET_ACCESS_KEY) }}"
   register: aws_alias_status

@@ -65,10 +65,12 @@ def main():
         module.fail_json(msg='This module requires boto3, please install it')
 
     aws_account_alias = module.params.get('aws_account_alias')
-    aws_account_state = module.params.get('state').lower()
+    aws_account_state = module.params.get('aws_account_state').lower()
     aws_access_key = module.params.get('aws_access_key')
     aws_secret_key = module.params.get('aws_secret_key')
 
+
+from ansible.module_utils.basic import *
 
 if __name__ == '__main__':
     main()
