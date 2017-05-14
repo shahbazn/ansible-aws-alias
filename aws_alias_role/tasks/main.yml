@@ -1,0 +1,9 @@
+---
+
+- name: Ensure AWS alias name
+  iam:
+    aws_account_alias: {{ aws_account_alias }}
+    aws_account_state: present
+    aws_access_key: {{ aws_access_key }}
+    aws_secret_key: {{ aws_secrete_key }}
+  register: aws_alias_status
