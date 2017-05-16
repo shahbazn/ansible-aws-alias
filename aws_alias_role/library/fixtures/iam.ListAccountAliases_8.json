@@ -2,17 +2,17 @@
     "status_code": 200, 
     "data": {
         "AccountAliases": [
-            "test-alias-12345-new"
+            "test-alias-12345"
         ], 
         "IsTruncated": false, 
         "ResponseMetadata": {
             "RetryAttempts": 0, 
             "HTTPStatusCode": 200, 
-            "RequestId": "87dd01e3-3a67-11e7-b978-33728abc79e5", 
+            "RequestId": "94635638-3a67-11e7-8e73-7f47d6edec0c", 
             "HTTPHeaders": {
-                "x-amzn-requestid": "87dd01e3-3a67-11e7-b978-33728abc79e5", 
-                "date": "Tue, 16 May 2017 18:43:18 GMT", 
-                "content-length": "399", 
+                "x-amzn-requestid": "94635638-3a67-11e7-8e73-7f47d6edec0c", 
+                "date": "Tue, 16 May 2017 18:43:39 GMT", 
+                "content-length": "395", 
                 "content-type": "text/xml"
             }
         }

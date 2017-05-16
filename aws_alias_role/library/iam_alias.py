@@ -85,6 +85,7 @@ def get_account_alias(module, client):
 	return alias
 
 def set_account_alias(module, client, alias):
+	changed = False
 	try:
 		resp = client.create_account_alias(
 			AccountAlias=alias)
@@ -96,6 +97,7 @@ def set_account_alias(module, client, alias):
 	return changed
 
 def delete_account_alias(module, client, alias):
+	changed = False
 	try:
 		resp = client.delete_account_alias(
 			AccountAlias=alias)

@@ -121,11 +121,94 @@ class TestIamAlias(unittest.TestCase):
 			)
 		return module
 
-	def test_create_valid_alias(self):
+	def test_create_alias(self):
 		self.aws_account_alias = "test-alias-12345"
 		self.aws_account_state = "present"
 
 		alias = self.aws_account_alias
 		client = self.client
 		module = self.module
-		set_account_alias(module, client, alias)
+		self.assertTrue(set_account_alias(module, client, alias))
+
+	def test_create_existing_alias(self):
+		self.aws_account_alias = "test-alias"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		with self.assertRaises(SystemExit):
+			set_account_alias(module, client, alias)
+
+	def test_create_invalid_alias(self):
+		self.aws_account_alias = "test_alias"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		with self.assertRaises(SystemExit):
+			set_account_alias(module, client, alias)
+
+	def test_update_alias(self):
+		self.aws_account_alias = "test-alias-12345"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		new_alias = alias + "-new"
+		client = self.client
+		module = self.module
+		self.assertTrue(set_account_alias(module, client, alias))
+		self.assertTrue(set_account_alias(module, client, new_alias))
+
+	def test_delete_alias(self):
+		self.aws_account_alias = "test-alias-12345"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		self.assertTrue(set_account_alias(module, client, alias))
+		self.assertTrue(delete_account_alias(module, client, alias))
+
+	def test_delete_wrong_alias(self):
+		self.aws_account_alias = "test-alias-12345"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		wrong_alias = alias + "-wrong"
+		client = self.client
+		module = self.module
+		self.assertTrue(set_account_alias(module, client, alias))
+		with self.assertRaises(SystemExit):
+			delete_account_alias(module, client, wrong_alias)
+
+	def test_delete_alias_when_not_created(self):
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		with self.assertRaises(SystemExit):
+			delete_account_alias(module, client, alias)
+
+	def test_get_alias_when_not_created(self):
+		current_alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		self.assertEqual(current_alias, get_account_alias(module, client))
+
+	def test_get_alias(self):
+		self.aws_account_alias = "test-alias-12345"
+		self.aws_account_state = "present"
+
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		self.assertTrue(set_account_alias(module, client, alias))
+		self.assertEqual(alias, get_account_alias(module, client))
+
+	def test_get_user_id(self):
+		alias = self.aws_account_alias
+		client = self.client
+		module = self.module
+		self.assertEqual("AIDAIBRE2H6WHUF7L3MC2", get_user_id(module, client))
+

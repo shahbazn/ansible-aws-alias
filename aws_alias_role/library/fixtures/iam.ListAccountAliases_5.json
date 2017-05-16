@@ -1,0 +1,18 @@
+{
+    "status_code": 200, 
+    "data": {
+        "AccountAliases": [], 
+        "IsTruncated": false, 
+        "ResponseMetadata": {
+            "RetryAttempts": 0, 
+            "HTTPStatusCode": 200, 
+            "RequestId": "902a8f22-3a67-11e7-b978-33728abc79e5", 
+            "HTTPHeaders": {
+                "x-amzn-requestid": "902a8f22-3a67-11e7-b978-33728abc79e5", 
+                "date": "Tue, 16 May 2017 18:43:32 GMT", 
+                "content-length": "334", 
+                "content-type": "text/xml"
+            }
+        }
+    }
+}

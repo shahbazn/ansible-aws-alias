@@ -1,0 +1,32 @@
+{
+    "status_code": 200, 
+    "data": {
+        "User": {
+            "UserName": "test_user_1", 
+            "Path": "/", 
+            "CreateDate": {
+                "hour": 18, 
+                "__class__": "datetime", 
+                "month": 5, 
+                "second": 18, 
+                "microsecond": 0, 
+                "year": 2017, 
+                "day": 13, 
+                "minute": 46
+            }, 
+            "UserId": "AIDAIBRE2H6WHUF7L3MC2", 
+            "Arn": "arn:aws:iam::805202336463:user/test_user_1"
+        }, 
+        "ResponseMetadata": {
+            "RetryAttempts": 0, 
+            "HTTPStatusCode": 200, 
+            "RequestId": "972201a0-3a67-11e7-a5b8-f77524b8a364", 
+            "HTTPHeaders": {
+                "x-amzn-requestid": "972201a0-3a67-11e7-a5b8-f77524b8a364", 
+                "date": "Tue, 16 May 2017 18:43:44 GMT", 
+                "content-length": "471", 
+                "content-type": "text/xml"
+            }
+        }
+    }
+}
