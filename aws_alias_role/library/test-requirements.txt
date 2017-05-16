@@ -1,0 +1,4 @@
+ansible==2.2.1.0
+boto3==1.4.4
+placebo==0.8.1
+mock==2.0.0
