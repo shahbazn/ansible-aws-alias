@@ -1,4 +1,4 @@
-import boto3
+import botocore
 import placebo
 import json
 import mock
@@ -6,6 +6,7 @@ import os
 import unittest
 
 from ansible.module_utils import basic
+from boto3 import client as aws_client
 from iam_alias import (get_user_id,
 	get_account_alias,
 	set_account_alias,
@@ -31,8 +32,10 @@ class TestIamAlias(unittest.TestCase):
 			self.aws_access_key = "test-key"
 			self.aws_secret_key = "test-secret"
 
-		self.client = self._boto3_client()
 		self.module = self._get_module()
+		self.client = aws_client("iam",
+			aws_access_key_id=self.aws_access_key,
+			aws_secret_access_key=self.aws_secret_key)
 
 		# Each Test starts with a clean account
 		# alias state so before each test any
@@ -57,44 +60,6 @@ class TestIamAlias(unittest.TestCase):
 
 		if alias:
 			delete_account_alias(module, client, alias)
-
-	def _boto3_client(self):
-		"""This fixture puts a recording/replaying harness around `boto3.Session.client`
-
-		Placebo_client returns a boto3 session that in recording or replaying mode,
-		depending on the PLACEBO_RECORD environment variable. Unset PLACEBO_RECORD
-		(the common case or just running tests) will put placebo in replay mode, set
-		PLACEBO_RECORD to any value to turn off replay & operate on real AWS resources.
-
-		The recorded sessions are stored in the test file's directory, under the
-		namespace `fixtures/{test function name}` to
-		distinguish them.
-		"""
-		session = boto3.session.Session()
-
-		recordings_path = os.path.join(
-			os.path.dirname(os.path.realpath(__file__)),
-			"fixtures"
-			)
-
-		try:
-			# make sure the directory for placebo test recordings is available
-			os.makedirs(recordings_path)
-		except OSError as e:
-			if e.errno != os.errno.EEXIST:
-				raise
-
-		self.pill = placebo.attach(session, data_path=recordings_path)
-		if os.getenv("PLACEBO_RECORD")=="record":
-			self.pill.record()
-		else:
-			self.pill.playback()
-
-		client = session.client("iam",
-			aws_access_key_id=self.aws_access_key,
-			aws_secret_access_key=self.aws_secret_key)
-
-		return client
 
 
 	def _get_module(self):
