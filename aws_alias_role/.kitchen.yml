@@ -1,0 +1,34 @@
+
+---
+driver                    :
+    name                  : docker
+    socket                : unix:///var/run/docker.sock
+    use_sudo              : false
+
+provisioner               :
+    name                  : ansible_push
+    #verbose               : "vvvv"
+    chef_bootstrap_url    : nil
+    ansible_config        : "test/ansible.cfg"
+    idempotency_test      : False
+    diff                  : False
+
+verifier                  :
+  name                    : serverspec
+  remote_exec             : false
+  default_pattern         : true
+
+
+platforms:
+ - name                   : ubuntu16.04-v2.2
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.2)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:16.04
+     platform             : ubuntu
+
+suites:
+  - name                  : simple create
+    provisioner           :
+        playbook          : "test/integeration/simple_create/simple_create.yml"
+
