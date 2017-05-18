@@ -35,3 +35,8 @@ curl -s https://raw.githubusercontent.com/ahelal/avm/${SETUP_VERSION}/setup.sh -
 
 ## Run the setup
 . $my_temp_dir/setup.sh
+
+## Export AWS credentials
+
+export AWS_ACCESS_KEY_ID="AKIAIEVUSPDNZ5HNR4BA"
+export AWS_SECRET_ACCESS_KEY="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"

@@ -11,9 +11,9 @@ def clean_aliases():
 	    aws_secret_access_key=aws_secret_access_key)
 
 	resp = client.list_account_aliases()
-
+	print resp
 	if resp["AccountAliases"]:
-		client.delete_account_alias(AccountAlias=resp["AccountAliases"])
+		client.delete_account_alias(AccountAlias=resp["AccountAliases"][0])
 
 if __name__ == "__main__":
 	clean_aliases()

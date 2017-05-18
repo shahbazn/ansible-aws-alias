@@ -1,0 +1,78 @@
+
+---
+driver                    :
+    name                  : docker
+    socket                : unix:///var/run/docker.sock
+    use_sudo              : true
+
+provisioner               :
+    name                  : ansible_push
+    # verbose               : "vvvv"
+    chef_bootstrap_url    : nil
+    ansible_config        : "test/ansible.cfg"
+    idempotency_test      : true
+    diff                  : false
+
+verifier                  :
+  name                    : serverspec
+  remote_exec             : false
+  default_pattern         : true
+
+
+platforms:
+
+ - name                   : ubuntu14.04-v2.0
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.0)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:14.04
+     platform             : ubuntu
+     volume               : 
+     provision_command    : 
+      - apt-get install -y -qq python-pip
+      - apt-get install ruby -y
+      - gem install 'aws-sdk'
+      - pip install boto3==1.4.4
+      - pip install botocore==1.5.48
+
+ - name                   : ubuntu14.04-v2.1
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.1)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:14.04
+     platform             : ubuntu
+     volume               : 
+     provision_command    : 
+      - apt-get install -y -qq python-pip
+      - apt-get install ruby -y
+      - gem install 'aws-sdk'
+      - pip install boto3==1.4.4
+      - pip install botocore==1.5.48
+
+ - name                   : ubuntu14.04-v2.2
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.2)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:14.04
+     platform             : ubuntu
+     volume               : 
+     provision_command    : 
+      - apt-get install -y -qq python-pip
+      - apt-get install ruby -y
+      - gem install 'aws-sdk'
+      - pip install boto3==1.4.4
+      - pip install botocore==1.5.48
+
+suites:
+  - name                  : create
+    provisioner           :
+        playbook          : "test/integration/create/create.yml"
+
+  - name                  : Update
+    provisioner           :
+        playbook          : "test/integration/update/update.yml"
+
+  - name                  : create
+    provisioner           :
+        playbook          : "test/integration/delete/delete.yml"
+

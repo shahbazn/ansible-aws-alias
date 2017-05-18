@@ -132,10 +132,16 @@ def main():
 	# Test for empty string values not covered by
 	# required=True parameter condition
 	if not aws_access_key_id:
-		module.fail_json(msg="empty value for required argument: aws_access_key_id")
+		try:
+			aws_access_key_id = os.environ["AWS_ACCESS_KEY_ID"]
+		except:
+			module.fail_json(msg="empty value for required argument: aws_access_key_id")
 
 	if not aws_secret_key:
-		module.fail_json(msg="empty value for required argument: aws_secret_key")
+		try:
+			aws_secret_access_key = os.environ["AWS_SECRET_ACCESS_KEY"]
+		except:
+			module.fail_json(msg="empty value for required argument: aws_secret_key")
 
 	client = aws_client(SERVICE,
 		aws_access_key_id=aws_access_key_id,
