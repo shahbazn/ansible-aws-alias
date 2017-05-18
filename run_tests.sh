@@ -1,9 +1,56 @@
 #!/bin/bash
-set -e
+# set -e
+
+
+function usage()
+{
+    echo ""
+    echo "Usage:"
+    echo ""
+    echo "./run_tests.sh"
+    echo "    -h --help"
+    echo "    --access-key=AWS_ACCESS_KEY_ID"
+    echo "    --access-secret=AWS_SECRET_ACCESS_KEY"
+    echo ""
+}
+
+if [[ $# -ne 2 ]]
+	then
+	usage
+	exit
+fi
+
+while [[ "$1" != "" ]]
+do
+    PARAM=`echo $1 | awk -F= '{print $1}'`
+    VALUE=`echo $1 | awk -F= '{print $2}'`
+
+	case $PARAM in
+		-h | --help)
+		    usage
+		    exit
+		    ;;
+	    --access-key)
+		    AWS_ACCESS_KEY_ID=$VALUE
+		    ;;
+	    --access-secret)
+		    AWS_SECRET_ACCESS_KEY=$VALUE
+		    ;;
+	    *)
+	        echo "ERROR: unknown parameter \"$PARAM\""
+	        usage
+	        exit 1
+	        ;;
+	esac
+	shift
+done
+
 
 echo "Setting up ansible virtual environments"
 
+VIRTUAL_ENV="aws_alias_test"
 SETUP_VERSION="v0.0.5"
+ROLE_DIR="$(pwd)/aws_alias_role"
 
 ## Install Ansible 2.0
 ## using the latest 2.0 version
@@ -33,10 +80,21 @@ my_temp_dir="$(mktemp -dt ${filename}.XXXX)"
 
 curl -s https://raw.githubusercontent.com/ahelal/avm/${SETUP_VERSION}/setup.sh -o $my_temp_dir/setup.sh
 
-## Run the setup
+# Run the setup
 . $my_temp_dir/setup.sh
 
-## Export AWS credentials
+echo "Setting AWS credentials"
+export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
-export AWS_ACCESS_KEY_ID="AKIAIEVUSPDNZ5HNR4BA"
-export AWS_SECRET_ACCESS_KEY="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"
+echo "installing dependencies"
+$(avm path v2.1)/pip install -r ${ROLE_DIR}/requirements.txt
+
+echo "Running unit tests"
+$(avm path v2.1)/nosetests -w ${ROLE_DIR}/library
+
+cd aws_alias_role
+echo "Installing integeration test dependencies"
+bundle install
+echo "Running integeration tests"
+kitchen test

@@ -1,5 +1,4 @@
 import datetime
-import placebo
 import json
 import mock
 import os
