@@ -109,4 +109,4 @@ cd aws_alias_role
 echo "Installing integeration test dependencies"
 bundle install
 echo "Running integeration tests"
-# kitchen test
+kitchen test
