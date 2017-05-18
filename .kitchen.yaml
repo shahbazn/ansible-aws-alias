@@ -10,8 +10,8 @@ provisioner               :
     #verbose               : "vvvv"
     chef_bootstrap_url    : nil
     ansible_config        : "test/ansible.cfg"
-    idempotency_test      : False
-    diff                  : False
+    idempotency_test      : false
+    diff                  : false
 
 verifier                  :
   name                    : serverspec
@@ -20,6 +20,20 @@ verifier                  :
 
 
 platforms:
+ - name                   : ubuntu16.04-v2.2
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.0)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:16.04
+     platform             : ubuntu
+
+ - name                   : ubuntu16.04-v2.2
+   provisioner            :
+     ansible_playbook_bin : "$(avm path v2.1)ansible-playbook"
+   driver_config          :
+     image                : ubuntu:16.04
+     platform             : ubuntu
+
  - name                   : ubuntu16.04-v2.2
    provisioner            :
      ansible_playbook_bin : "$(avm path v2.2)ansible-playbook"

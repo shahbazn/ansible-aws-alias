@@ -1,0 +1,4 @@
+.kitchen
+.idea
+*.pyc
+*.retry
