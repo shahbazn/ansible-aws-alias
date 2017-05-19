@@ -1,3 +1,4 @@
+import ansible
 import datetime
 import json
 import mock
@@ -11,6 +12,9 @@ from iam_alias import (get_user_id,
 	get_account_alias,
 	set_account_alias,
 	delete_account_alias)
+from packaging import version
+
+VERSION_2_0 = version.parse(ansible.__version__) < version.parse("2.1.0")
 
 class TestIamAlias(unittest.TestCase):
 	def setUp(self):
@@ -130,15 +134,25 @@ class TestIamAlias(unittest.TestCase):
 		self.stubber.activate()
 
 	def _get_module(self):
-		# Set Ansible Module Arguments
-		basic._ANSIBLE_ARGS = json.dumps(dict(
-			ANSIBLE_MODULE_ARGS=dict(
+		# Set Ansible Module Arguments and
+		# ensure compatibility with Ansible 2.0.2.0
+		if VERSION_2_0:
+			basic.MODULE_COMPLEX_ARGS = json.dumps(dict(
 				aws_account_alias=self.aws_account_alias,
 				aws_account_state=self.aws_account_state,
 				aws_access_key=self.aws_access_key,
 				aws_secret_key=self.aws_secret_key
 				)
-			))
+			)
+		else:
+			basic._ANSIBLE_ARGS = json.dumps(dict(
+				ANSIBLE_MODULE_ARGS=dict(
+					aws_account_alias=self.aws_account_alias,
+					aws_account_state=self.aws_account_state,
+					aws_access_key=self.aws_access_key,
+					aws_secret_key=self.aws_secret_key
+					)
+				))
 
 		argument_spec = dict(
 			aws_account_alias=dict(default=None, required=False),
