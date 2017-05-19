@@ -53,6 +53,9 @@ Unit testing Depends on following python modules
  - ruby
  - bundle install the aws_alias_role Gemfile
 
+CAVEAT: If the alises being used in integration tests get consumed before
+        running tests the tests will fail. 
+
 ### Running Tests
 ```
 Usage:
