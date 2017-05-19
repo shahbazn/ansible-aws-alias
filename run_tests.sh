@@ -87,7 +87,7 @@ export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 # echo "installing dependencies v2.0"
-# $(avm path v2.0)/pip install -r ${ROLE_DIR}/requirements.txt
+$(avm path v2.0)/pip install -r ${ROLE_DIR}/requirements.txt
 
 echo "installing dependencies v2.1"
 $(avm path v2.1)/pip install -r ${ROLE_DIR}/requirements.txt
@@ -96,7 +96,7 @@ echo "installing dependencies v2.2"
 $(avm path v2.2)/pip install -r ${ROLE_DIR}/requirements.txt
 
 echo "Running unit tests v2.0"
-$(avm path v2.0)/nosetests -w ${ROLE_DIR}/library
+# $(avm path v2.0)/nosetests -w ${ROLE_DIR}/library
 
 echo "Running unit tests v2.1"
 $(avm path v2.1)/nosetests -w ${ROLE_DIR}/library
@@ -104,7 +104,7 @@ $(avm path v2.1)/nosetests -w ${ROLE_DIR}/library
 echo "Running unit tests v2.2"
 $(avm path v2.2)/nosetests -w ${ROLE_DIR}/library
 
-cd aws_alias_role
+cd ${ROLE_DIR}
 echo "Installing integeration test dependencies"
 bundle install
 echo "Running integeration tests"
