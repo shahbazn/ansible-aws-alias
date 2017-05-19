@@ -78,4 +78,11 @@ Usage:
 ```
 
 ### Test coverage
- - Tests cover Ansible 2.0, 2.1 and 2.2
+ - Integration Tests cover Ansible 2.0, 2.1 and 2.2
+ - Unit Tests cover Ansible 2.0, 2.1 and 2.2
+
+## TODO
+ - Decouple mock methods from test_iam_alias.py and move to seperate mock library
+ - write a decorator to enable Dry Run when --check flag is set
+ - decorator should call appropriate mock method when --check flag is enabled this
+   will allow a dry run of the role
