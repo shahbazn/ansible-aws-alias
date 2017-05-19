@@ -21,33 +21,33 @@ verifier                  :
 
 platforms:
 
- - name                   : ubuntu14.04-v2.0
-   provisioner            :
-     ansible_playbook_bin : "$(avm path v2.0)ansible-playbook"
-   driver_config          :
-     image                : ubuntu:14.04
-     platform             : ubuntu
-     volume               : 
-     provision_command    : 
-      - apt-get install -y -qq python-pip
-      - apt-get install ruby -y
-      - gem install 'aws-sdk'
-      - pip install boto3==1.4.4
-      - pip install botocore==1.5.48
+ # - name                   : ubuntu14.04-v2.0
+ #   provisioner            :
+ #     ansible_playbook_bin : "$(avm path v2.0)ansible-playbook"
+ #   driver_config          :
+ #     image                : ubuntu:14.04
+ #     platform             : ubuntu
+ #     volume               : 
+ #     provision_command    : 
+ #      - apt-get install -y -qq python-pip
+ #      - apt-get install ruby -y
+ #      - gem install 'aws-sdk'
+ #      - pip install boto3==1.4.4
+ #      - pip install botocore==1.5.48
 
- - name                   : ubuntu14.04-v2.1
-   provisioner            :
-     ansible_playbook_bin : "$(avm path v2.1)ansible-playbook"
-   driver_config          :
-     image                : ubuntu:14.04
-     platform             : ubuntu
-     volume               : 
-     provision_command    : 
-      - apt-get install -y -qq python-pip
-      - apt-get install ruby -y
-      - gem install 'aws-sdk'
-      - pip install boto3==1.4.4
-      - pip install botocore==1.5.48
+ # - name                   : ubuntu14.04-v2.1
+ #   provisioner            :
+ #     ansible_playbook_bin : "$(avm path v2.1)ansible-playbook"
+ #   driver_config          :
+ #     image                : ubuntu:14.04
+ #     platform             : ubuntu
+ #     volume               : 
+ #     provision_command    : 
+ #      - apt-get install -y -qq python-pip
+ #      - apt-get install ruby -y
+ #      - gem install 'aws-sdk'
+ #      - pip install boto3==1.4.4
+ #      - pip install botocore==1.5.48
 
  - name                   : ubuntu14.04-v2.2
    provisioner            :
