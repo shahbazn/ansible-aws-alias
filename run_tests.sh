@@ -48,7 +48,6 @@ done
 
 echo "Setting up ansible virtual environments"
 
-VIRTUAL_ENV="aws_alias_test"
 SETUP_VERSION="v0.0.5"
 ROLE_DIR="$(pwd)/aws_alias_role"
 
@@ -87,8 +86,8 @@ echo "Setting AWS credentials"
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
-echo "installing dependencies v2.0"
-$(avm path v2.0)/pip install -r ${ROLE_DIR}/requirements.txt
+# echo "installing dependencies v2.0"
+# $(avm path v2.0)/pip install -r ${ROLE_DIR}/requirements.txt
 
 echo "installing dependencies v2.1"
 $(avm path v2.1)/pip install -r ${ROLE_DIR}/requirements.txt
