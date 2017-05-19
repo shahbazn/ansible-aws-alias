@@ -50,16 +50,27 @@ Unit testing Depends on following python modules
 ### Integeration Test Requirements
 
  - docker CE
- - ruby
+ - ruby 2.3
+ - ruby bundler
  - bundle install the aws_alias_role Gemfile
 
 CAVEAT: If the alises being used in integration tests get consumed before
         running tests the tests will fail. 
 
 ### Running Tests
+- install docker CE
+- setup environment
 ```
-Usage:
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.3 ruby2.3-dev
+sudo gem install bundler
+```
+- Run test script
+```
+./run_tests.sh -h
 
+Usage:
 ./run_tests.sh
     -h --help
     --access-key=AWS_ACCESS_KEY_ID
