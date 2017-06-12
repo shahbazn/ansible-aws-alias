@@ -1,0 +1,5 @@
+.kitchen
+.idea
+*.pyc
+*.retry
+.DS_Store

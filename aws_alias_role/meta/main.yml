@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: Shahbaz Nazir
+  description: "Change AWS account alias"
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  categories:
+    - cloud

@@ -1,0 +1,15 @@
+---
+- name: Update Alias
+  hosts: "all"
+  gather_facts : no
+  become       : True
+  vars:
+    aws_account_alias: "test-alias-12345-new"
+    aws_account_state: present  
+
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+    AWS_SECRET_ACCESS_KEY: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
+
+  roles:
+    - aws_alias_role
